@@ -1,0 +1,21 @@
+<p>table works!</p>
+<div>
+  <table class="table ">
+    <thead>
+      <tr>
+      <th>Title</th>
+      <th>Lastname</th>
+      <th>Firstname</th>
+      <th>Email</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let d of user">
+      <tr>
+      <td>{{d.title}}</td>
+      <td>{{d.lastName}}</td>
+      <td>{{d.firstName}}</td>
+      <td>{{d.email}}</td>
+     </tr>
+    </tbody>
+  </table>
+</div>
