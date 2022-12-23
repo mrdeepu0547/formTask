@@ -20,4 +20,13 @@ export class TableComponent implements OnInit {
     console.log(i);
     this.data.emit(this.user[i]);
   }
+  onDelete(i:number){
+    // this.user.splice(i,1,'')
+  //   this.user.forEach((users,i)=>{
+  //     this.user.splice(i,1);
+  // });
+  console.log(this.user[i])
+  this.user.splice(i,1)
+  console.log(this.user)
+  }
 }
