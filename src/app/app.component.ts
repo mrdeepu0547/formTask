@@ -82,13 +82,17 @@ export class AppComponent implements OnInit {
     if(this.editMode==true){
       this.registerForm.get('id').setValue(this.editData.id)
       this.submitted = false;
-      for(let i=0;i<=this.user.length;i++){
-        if(this.user[i].id==this.editData.id){
-          this.user[i]=this.registerForm.getRawValue();
-          break;
-        }
-      }
+      // for(let i=0;i<this.user.length;i++){
+      //   if(this.user[i].id==this.editData.id){
+      //     this.user[i]=this.registerForm.getRawValue();
+      //   }
+      // }
       // this.user.splice(this.editData.id, 1,this.registerForm.getRawValue());
+     this.user=this.user.map(item=>{
+        if(item.id==this.editData.id){
+          item=this.registerForm.getRawValue();
+        }return item;
+      })
       console.log(this.registerForm.getRawValue())
       this.registerForm.controls['password'].enable();
       this.registerForm.controls['confirmPassword'].enable();

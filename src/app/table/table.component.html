@@ -20,7 +20,7 @@
       <td>{{d.email}}</td>
       <td>{{d.password}}</td>
       <td><button (click)="onEdit(i)"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
-      <td><button (click)="onDelete(i)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+      <td><button (click)="onDelete(d.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
      </tr>
     </tbody>
   </table>
