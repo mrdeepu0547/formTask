@@ -5,16 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableComponent } from './table/table.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PsListComponent } from './ps-list/ps-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormComponent } from './form/form.component';
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent
+    TableComponent,
+    PsListComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     ModalModule.forRoot()
   ],
   providers: [],
