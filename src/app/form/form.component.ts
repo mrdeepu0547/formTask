@@ -145,6 +145,7 @@ eventHandler(event:any){
   this.editMode=true;
   this.editData = event;
   console.log(this.editData);
+
 this.registerForm.get('lastName').setValue(this.editData.lastName)
 this.registerForm.get('firstName').patchValue(this.editData.firstName)
 this.registerForm.get('title').patchValue(this.editData.title)
