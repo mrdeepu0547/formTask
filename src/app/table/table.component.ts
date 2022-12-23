@@ -11,11 +11,8 @@ export class TableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.user)
   }
-//  UserType = {
-//     groupId: number;
-//     title: string;
-//   };
   public editId:number;
   onEdit(i:number){
     console.log(this.user[i].firstName)
