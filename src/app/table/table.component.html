@@ -7,14 +7,18 @@
       <th>Lastname</th>
       <th>Firstname</th>
       <th>Email</th>
+      <th>Password</th>
+      <th></th>
       </tr>
     </thead>
-    <tbody *ngFor="let d of user">
+    <tbody *ngFor="let d of user ,let i = index">
       <tr>
       <td>{{d.title}}</td>
       <td>{{d.lastName}}</td>
       <td>{{d.firstName}}</td>
       <td>{{d.email}}</td>
+      <td>{{d.password}}</td>
+      <td><button (click)="onEdit(i)"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
      </tr>
     </tbody>
   </table>

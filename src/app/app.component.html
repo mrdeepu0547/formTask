@@ -29,7 +29,7 @@
           <label>First Name</label>
           <input type="text" formControlName="firstName" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+          <div *ngIf="f.firstName.errors" class="invalid-feedback">
             <div *ngIf="f.firstName.errors.required">First Name is required</div>
           </div>
         </div>
@@ -55,7 +55,7 @@
         <div class="form-group col">
           <label>Password</label>
           <input [type]="passwordText" formControlName="password" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" [disabled]="true"/>
           <button (click)="displayPassword()">show</button>
 
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -86,11 +86,11 @@
         <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
       </div>
       <div class="text-center">
-        <button class="btn btn-primary mr-1" (click)="onSubmit()">Register</button>
-        <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+        <button class="btn btn-primary mr-1" (click)="onSubmit()">{{editMode?'edit':'create'}}</button>
+        <button class="btn btn-secondary" type="reset" (click)="createForm()">Cancel</button>
       </div>
     </form>
     <hr>
-<app-table [user]="user"></app-table>
+<app-table [user]="user" (data)="eventHandler($event)">></app-table>
   </div>
 </div>
