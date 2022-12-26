@@ -187,12 +187,12 @@ public submitted:boolean=false;
       console.log(result);
     })
    }
+  public i:number;
+  public names=[]
+  public adress=[]
   /**
    * modal for edit option
    */
-   public i:number;
-  public names=[]
-  public adress=[]
   public  openModal(template2: TemplateRef<any>,index:number) {
     const name =this.psList[index].PSName;
     const sname =this.psList[index].siteName;
@@ -232,7 +232,9 @@ public submitted:boolean=false;
       console.log(result);
       this.personForm.reset();
       this.submitted = false;
+      this.modalService.hide();
     })
+    this.getPSList();
   }
 }
 }
