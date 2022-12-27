@@ -1,61 +1,12 @@
-<p>ps-list works!</p>
-<label class="card-title mr-2">Table size</label>
-<select
-class="form-control-sm"
-[(ngModel)]="pageSize"
-(ngModelChange)="setPageSize()">
-<option *ngFor="let size of paseSizes">{{ size }}</option>
-</select>
-<hr>
-<div class="d-flex ms-auto order-5">
-  <button class="btn btn-light" type="button" [disabled]="lowerBound<=0" (click)="onPrevious()">Previous</button>&nbsp;&nbsp;
-  <button class="btn btn-dark" type="button" (click)="onNext()">Next</button>
-</div>
-<div>
-  <table class="table ">
-    <table class="table table-success table-hover table-light">
-      <thead>
-        <tr>
-          <th>Ps Name</th>
-          <th>Home Site</th>
-          <th>MRN</th>
-          <th>SSN</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Zip Code</th>
-          <th>Phone</th>
-          <th>Edit</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let data of psList ,let i = index">
-        <tr>
-          <td>{{data.PSName}}</td>
-          <td>{{data.PSId}}</td>
-          <td>{{data.homeSite}}</td>
-          <td>{{data.mrn}}</td>
-          <td>{{data.city}}</td>
-          <td>{{data.state}}</td>
-          <td>{{data.zipCode}}</td>
-          <td>{{data.phone}}</td>
-          <td><button (click)="openModal(data)" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></td>
-        </tr>
-      </tbody>
-    </table>
-  </table>
-</div>
-<div>
-  <button type="button" class="btn btn-primary" (click)="openModalWithClass(template1)">Create</button>
-<br>
 
-<ng-template #template1>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+    <button type="button" class="btn-close close pull-right" aria-label="Close"  (click)="modalRef?.hide()">
       <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form class="row m-0" (ngSubmit)="onSubmit()" [formGroup]="personForm">
+    <form class="row m-0" [formGroup]="personForm">
       <div class="col-md-4 col-12">
         <div class="form-group">
           <label id="lastName">Last Name</label>
@@ -382,10 +333,8 @@ class="form-control-sm"
       <nav class="navbar navbar-expand-sm navbar-dark  navbar-fixed-top">
 
         <div class="d-flex ms-auto order-5">
-          <div><button type="submit" class="btn btn-success" (click)="onSubmit()">Save</button></div>
+          <div><button type="submit" class="btn btn-success" (click)="editSubmit()">Save</button></div>
         </div>
       </nav>
     </form>
   </div>
-</ng-template>
-</div>

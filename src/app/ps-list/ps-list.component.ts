@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TemplateRef } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ContentComponent } from '../content/content.component';
+import { DataService } from '../service/data.service';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ps-list',
@@ -11,9 +14,10 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./ps-list.component.scss']
 })
 export class PsListComponent implements OnInit {
+  public
   modalRef?: BsModalRef;
   public psList = [];
-  public lookUpsData:any = [];
+  public lookUpsData: any = [];
   public pageSize: number = 20;
   public paseSizes: number[] = [5, 10, 15, 20];
   public lowerBound = 1;
@@ -21,7 +25,7 @@ export class PsListComponent implements OnInit {
   public posts = [];
   //form defiened here
   personForm = new FormGroup({
-    psId:new FormControl(0),
+    psId: new FormControl(0),
     lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     gender: new FormControl('', [Validators.required]),
@@ -35,9 +39,9 @@ export class PsListComponent implements OnInit {
     addressLine1: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
     addressLine2: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
     zipCode: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    phoneType:new FormControl('',[Validators.required]),
+    phoneType: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
-    city: new FormControl('',[Validators.required, Validators.minLength(4), Validators.maxLength(15)]),
+    city: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]),
     state: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]),
     timeZone: new FormControl('', [Validators.required]),
     country: new FormControl('', [Validators.required]),
@@ -69,14 +73,23 @@ export class PsListComponent implements OnInit {
     "mappedOfficeIds": "140",
     "updatedUserId": 1
   }
+  subscription: Subscription;
   // public url=http://poc.aquilasoftware.com/poclite/psapi/getPSList?jsonObj={"userId":1,"lowerBound":21,"upperBound":40,}
-  constructor(public http: HttpClient,private modalService: BsModalService, public datePipe: DatePipe) { }
+  constructor(public http: HttpClient, private modalService: BsModalService, public datePipe: DatePipe, public dataService: DataService) { }
   ngOnInit() {
-    this.getLookupData()
-    this.getPSList()
+    this.dataService.getLookupData()
+    this.getPSList();
+    this.subscription=this.dataService.updateTable$.subscribe(
+      (result) => {
+        console.log(result)
+        this.getPSList();
+        // this.postData = result;
+        // this.postEditData()
+      })
   }
   ngOnChanges() {
     this.setPageSize()
+    this.getPSList();
   }
   /**
    * getPSList is used to fetch data for psList table
@@ -100,15 +113,16 @@ export class PsListComponent implements OnInit {
     this.upperBound = this.upperBound - Number(this.pageSize)
     console.log(this.lowerBound);
     console.log(this.upperBound);
-    let object={
+    let object = {
       userId: 1,
-      lowerBound:this.lowerBound,
-      upperBound:this.upperBound,
+      lowerBound: this.lowerBound,
+      upperBound: this.upperBound,
     }
-    this.http.get('http://poc.aquilasoftware.com/poclite/psapi/getPSList?jsonObj='+JSON.stringify(object)).subscribe(
-    (response:any) => { this.psList = response.psList ; console.log(this.psList)},
-    (error) => { console.log(error);
-    });
+    this.http.get('http://poc.aquilasoftware.com/poclite/psapi/getPSList?jsonObj=' + JSON.stringify(object)).subscribe(
+      (response: any) => { this.psList = response.psList; console.log(this.psList) },
+      (error) => {
+        console.log(error);
+      });
   }
 
   onNext() {
@@ -117,124 +131,104 @@ export class PsListComponent implements OnInit {
     this.upperBound = this.upperBound + Number(this.pageSize);
     console.log(this.lowerBound);
     console.log(this.upperBound);
-    let object={
+    let object = {
       userId: 1,
-      lowerBound:this.lowerBound,
-      upperBound:this.upperBound,
+      lowerBound: this.lowerBound,
+      upperBound: this.upperBound,
     }
-    this.http.get('http://poc.aquilasoftware.com/poclite/psapi/getPSList?jsonObj='+JSON.stringify(object)).subscribe(
-    (response:any) => { this.psList = response.psList ; console.log(this.psList)},
-    (error) => { console.log(error);
-    });
+    this.http.get('http://poc.aquilasoftware.com/poclite/psapi/getPSList?jsonObj=' + JSON.stringify(object)).subscribe(
+      (response: any) => { this.psList = response.psList; console.log(this.psList) },
+      (error) => {
+        console.log(error);
+      });
   }
   setPageSize() {
     console.log(this.pageSize);
-    this.lowerBound=1;
+    this.lowerBound = 1;
     this.upperBound = Number(this.pageSize);
     console.log(this.lowerBound);
     console.log(this.upperBound);
-    let object={
+    let object = {
       userId: 1,
-      lowerBound:this.lowerBound,
-      upperBound:this.upperBound,
+      lowerBound: this.lowerBound,
+      upperBound: this.upperBound,
     }
-    this.http.get('http://poc.aquilasoftware.com/poclite/psapi/getPSList?jsonObj='+JSON.stringify(object)).subscribe(
-    (response:any) => { this.psList = response.psList ; console.log(this.psList)},
-    (error) => { console.log(error);
-    });
+    this.http.get('http://poc.aquilasoftware.com/poclite/psapi/getPSList?jsonObj=' + JSON.stringify(object)).subscribe(
+      (response: any) => { this.psList = response.psList; console.log(this.psList) },
+      (error) => {
+        console.log(error);
+      });
   }
-/**
-   *opening modal forms
-*/
+  /**
+     *opening modal forms
+  */
   openModalWithClass(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(
       template,
       Object.assign({}, { class: 'gray modal-lg' })
     );
   }
-/**
-   *submitting form
-*/
-public submitted:boolean=false;
+  /**
+     *submitting form
+  */
+  public submitted: boolean = false;
   onSubmit() {
     this.submitted = true;
-    if(this.personForm.invalid){
+    if (this.personForm.invalid) {
       alert("invalid data");
-     }
-     else{
+    }
+    else {
       console.log(this.personForm.value.dateOfBirth)
       console.log(this.personForm.getRawValue());
-      this.data.saluationId=this.personForm.value.salutation;
-      this.data.firstName=this.personForm.value.firstName;
-      this.data.lastName=this.personForm.value.lastName;
+      this.data.saluationId = this.personForm.value.salutation;
+      this.data.firstName = this.personForm.value.firstName;
+      this.data.lastName = this.personForm.value.lastName;
       console.log(this.personForm.value.dateOfBirth)
-      this.data.dob=this.datePipe.transform(this.personForm.value.dateOfBirth, 'MM/dd/yyyy');
+      this.data.dob = this.datePipe.transform(this.personForm.value.dateOfBirth, 'MM/dd/yyyy');
       console.log(this.data.dob)
-      this.http.post('http://poc.aquilasoftware.com/poclite/psapi/savePSDetails',JSON.stringify(this.data)).subscribe(result=>{
-      console.log(result);
-      this.personForm.reset();
-      this.submitted = false;
-    })
-     }
-   }
+      this.http.post('http://poc.aquilasoftware.com/poclite/psapi/savePSDetails', JSON.stringify(this.data)).subscribe(result => {
+        console.log(result);
+        this.personForm.reset();
+        this.submitted = false;
+      })
+    }
+  }
   //  ''
-   /**
-    * getting lookup data for form
-    */
-   public getLookupData() {
-    this.http.get('http://poc.aquilasoftware.com/poclite/common/getLookupsData?lookupNames=gender,salutation,race,maritial_status,address_type,phone_type,language').subscribe(result => {
-      this.lookUpsData = result;
-      console.log(result);
-    })
-   }
-  public i:number;
-  public names=[]
-  public adress=[]
+  /**
+   * getting lookup data for form
+   */
+
+  public i: number;
+  public names = []
+  public adress = []
   /**
    * modal for edit option
    */
-  public  openModal(template2: TemplateRef<any>,index:number) {
-    const name =this.psList[index].PSName;
-    const sname =this.psList[index].siteName;
-    this.adress=sname.split("-")
-    this.i=index
-    console.log(this.adress)
-    console.log(this.psList[index])
-    this.names=name.split(",")
-    console.log(this.names)
-    this.personForm.get('lastName').setValue(this.names[0])
-    this.personForm.get('firstName').patchValue(this.names[1])
-    this.personForm.get('city').patchValue(this.psList[index].city)
-    this.personForm.get('phone').patchValue(this.psList[index].phone)
-    this.personForm.get('state').patchValue(this.psList[index].state)
-    this.personForm.get('zipCode').patchValue(this.psList[index].zipCode)
-    this.personForm.get('addressLine1').patchValue(this.adress[0])
-    this.personForm.get('addressLine2').patchValue(this.adress[1])
-    this.modalRef = this.modalService.show(template2);
+  public postData: any;
+  public openModal(data) {
+    console.log(data);
+    this.modalRef = this.modalService.show(ContentComponent, {
+      initialState: {
+        submitted: false,
+        PSId: data.PSId
+      }
+    });
+
   }
   /**
-   * editSubmit
-
+   * postEditData
    */
-  public editSubmit() {
-    if(this.personForm.invalid){
-      alert("invalid data");
-     }else{
-    this.data.psId=this.psList[this.i].PSId
-    this.data.firstName=this.personForm.value.firstName
-    this.data.lastName=this.personForm.value.lastName
-    this.data.city=this.personForm.value.city
-    this.data.phone=this.personForm.value.phone
-    this.data.zipcode=this.personForm.value.zipCode
-    this.data.addressLine=this.personForm.value.addressLine1
-    this.data.addressLine2=this.personForm.value.addressLine2
-    this.http.post('http://poc.aquilasoftware.com/poclite/psapi/savePSDetails',JSON.stringify(this.data)).subscribe(result=>{
-      console.log(result);
-      this.personForm.reset();
-      this.submitted = false;
-      this.modalService.hide();
+  public postEditData() {
+    this.http.post('http://poc.aquilasoftware.com/poclite/psapi/savePSDetails', JSON.stringify(this.postData)).subscribe(
+      result => {
+      console.log("sucess")
+      console.log(this.postData)
     })
-    this.getPSList();
+
   }
-}
+  ngOnDestroy() {
+    console.log("in destroy")
+    this.subscription.unsubscribe();
+ }
+
 }
