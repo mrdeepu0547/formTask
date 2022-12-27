@@ -225,18 +225,16 @@
       <div class="col-md-4 col-12">
         <div class="form-group">
           <label id="phoneType">Phone type</label>
-          <select
+          <input
+            type="text"
             class="form-control"
             id="phoneType"
             formControlName="phoneType"
             [ngClass]="{'is-invalid':submitted && personForm.controls.phoneType.errors}" required>
-            <option>--select--</option>
-            <option *ngFor="let item of lookUpsData?.phoneType">{{item.name}}</option>
-          </select>
           <span
             *ngIf="personForm.controls.phoneType && personForm.controls.phoneType.invalid && personForm.controls.phoneType.touched
                   ||submitted && personForm.controls.phoneType.errors" style="color: red;">
-            <p style="font-size: 13px;">Please select an valid Input</p>
+            <p style="font-size: 13px;">Please enter a valid Input</p>
           </span>
         </div>
       </div>
@@ -292,41 +290,32 @@
       <div class="col-md-4 col-12">
         <div class="form-group">
           <label id="timeZone">Time Zone</label>
-          <select
+          <input
+            type="text"
             class="form-control"
             id="timeZone"
             formControlName="timeZone"
-            [ngClass]="{'is-invalid':submitted && personForm.controls.timeZone.errors}" required>
-            <option>--select--</option>
-            <option value="indian">Indian</option>
-            <option value="europe">Europe</option>
-            <option value="atlantic">Atlantic</option>
-          </select>
+            [ngClass]="{'is-invalid':submitted && personForm.controls.timeZone.errors}" ng-readonly required>
           <span
             *ngIf="personForm.controls.timeZone && personForm.controls.timeZone.invalid && personForm.controls.timeZone.touched
                   ||submitted && personForm.controls.timeZone.errors" style="color: red;">
-            <p style="font-size: 13px;">Please select an valid Input</p>
+            <p style="font-size: 13px;">Please enter a valid Input</p>
           </span>
         </div>
       </div>
       <div class="col-md-4 col-12">
         <div class="form-group">
           <label id="country">Country</label>
-          <select
+          <input
+            type="text"
             class="form-control"
             id="country"
             formControlName="country"
-            [ngClass]="{'is-invalid':submitted && personForm.controls.country.errors}" required>
-            <option>--select--</option>
-            <option value="in">India</option>
-            <option value="us">United States</option>
-            <option value="eu">Europe</option>
-            <option value="uk">United Kingdom</option>
-          </select>
+            [ngClass]="{'is-invalid':submitted && personForm.controls.country.errors}" ng-readonly required>
           <span
             *ngIf="personForm.controls.country && personForm.controls.country.invalid && personForm.controls.country.touched
                   ||submitted && personForm.controls.country.errors" style="color: red;">
-            <p style="font-size: 13px;">Please select an valid Input</p>
+            <p style="font-size: 13px;">Please enter a valid Input</p>
           </span>
         </div>
       </div>

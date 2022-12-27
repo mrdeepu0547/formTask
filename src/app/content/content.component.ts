@@ -77,6 +77,7 @@ export class ContentComponent {
   public getLookupData() {
     this.dataService.getLookupData().subscribe(result => {
       this.lookUpsData = result;
+      console.log(this.lookUpsData)
     })
   }
   public getPSDetails() {
@@ -92,6 +93,7 @@ export class ContentComponent {
         this.personForm.get('race').patchValue(res.raceId)
         this.personForm.get('ssn').patchValue(res.ssn)
         this.personForm.get('language').patchValue(res.languageId)
+        this.personForm.get('addressType').patchValue(res.locationId)
         this.personForm.get('addressLine1').patchValue(res.addressLane1)
         this.personForm.get('addressLine2').patchValue(res.addressLine2)
         this.personForm.get('zipCode').patchValue(res.zipCode)
@@ -99,12 +101,25 @@ export class ContentComponent {
         this.personForm.get('phone').patchValue(res.phone1)
         this.personForm.get('city').patchValue(res.city)
         this.personForm.get('state').patchValue(res.state)
-        this.personForm.get('timeZone').patchValue(res.timeZoneId)
-        this.personForm.get('country').patchValue(res.countryId)
+        this.getZipCodeData(res.zipCode)
       })
     } catch (error) {
 
     }
+  }
+  /**
+   * get ZipCode Data
+   */
+  public getZipCodeData(zipCode:number ) {
+    console.log(zipCode)
+    this.http.get(`http://poc.aquilasoftware.com/poclite/psapi/getZipCodeDetails?jsonObj={"zipCode":"${zipCode}"}`).subscribe(
+      (result:any)=>{
+        console.log(result)
+        console.log(result.timeZoneId)
+        this.personForm.get('timeZone').patchValue(result.timeZone)
+        this.personForm.get('country').patchValue(result.country)
+      }
+    )
   }
   public submitted = false;
   /**
@@ -123,6 +138,10 @@ export class ContentComponent {
       this.data.zipcode = this.personForm.value.zipCode
       this.data.addressLine = this.personForm.value.addressLine1
       this.data.addressLine2 = this.personForm.value.addressLine2
+      this.data.dob=this.personForm.value.dateOfBirth
+      this.data.genderId=this.personForm.value.gender
+      this.data.saluationId=this.personForm.value.salutation
+      this.data.maritalStatusID=this.personForm.value.maritialStatus
       console.log(this.data)
       this.onSubmit();
 
