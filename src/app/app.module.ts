@@ -10,13 +10,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormComponent } from './form/form.component';
 import { DatePipe } from '@angular/common';
 import { ContentComponent } from './content/content.component';
+import { LoginComponent } from './New/login/login.component';
+import { RegisterComponent } from './New/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
     PsListComponent,
     FormComponent,
-    ContentComponent
+    ContentComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
