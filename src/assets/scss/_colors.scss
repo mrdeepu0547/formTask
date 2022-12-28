@@ -1,0 +1,220 @@
+//colors
+sup {
+  color: red;
+}
+.icon-blue {
+  i {
+    background-color: $blue;
+  }
+}
+.icon-green {
+  i {
+    background-color: $green;
+  }
+}
+.icon-peach {
+  i {
+    background-color: $peach !important;
+  }
+}
+.icon-lightblue {
+  i {
+    background-color: $dashboard-blue !important;
+  }
+}
+.color-white {
+  color: $white;
+}
+.bg-blue-dark {
+  background-color: $bg-blue-dark !important;
+}
+.color-black {
+  color: $black;
+}
+.color-green {
+  color: $button;
+}
+.bg-grey-darker {
+  background-color: #bdc2c6 !important;
+}
+.bg-light-grey {
+  background: $input-grey-bg !important;
+}
+.bg-grey-l {
+  background-color: $table-body !important;
+}
+.bg-white {
+  background: $white;
+}
+.bg-dark {
+  background-color: $heading-bg !important;
+}
+.bg-blue {
+  background-color: #1690d1;
+}
+.bg-orange {
+  background-color: #FF6666;
+}
+.bg-blue-light {
+  background: $test-button !important;
+  &:hover {
+    background: $test-button !important;
+  }
+}
+.purple-bg {
+  background: #A16C8B;
+}
+.bg-gold {
+  background: #B1965F;
+}
+.bg-blue-square {
+  background: #660099;
+}
+.bg-pink {
+  background: #CC3399;
+}
+.green {
+  color: $green;
+}
+.color-grey-placeholder {
+  color: $filter-placeholder-clr;
+}
+.color-grey {
+  color: $input-grey-bg !important;
+}
+.text-grey {
+  color: $text !important;
+}
+.red {
+  background-color: $red;
+}
+.yellow {
+  background-color: $yellow-light;
+}
+.green {
+  background-color: $prime-green;
+}
+.color-grey {
+  color: $input-grey-bg !important;
+}
+.blue {
+  color: $blue;
+  cursor: pointer;
+}
+.color-red-light {
+  color: $red-light;
+}
+.color-green-light {
+  color: $prime-green;
+}
+.color-blue-light {
+  color: $link-blue;
+}
+.color-light-yellow {
+  color: #fdf569;
+}
+.color-black-dark {
+  color: #1d2326;
+}
+.color-green-dark {
+  color: #429d01;
+}
+.color-text-message {
+  color: #922040;
+}
+.bg-yellow {
+  background-color: $yellow !important;
+}
+.bg-light-grey {
+  background: $bg-light-grey;
+}
+.bg-green-logo {
+  background-color: $green !important;
+}
+.info-color {
+  color: $info-light-blue;
+}
+.telepny-bg {
+  background-color: #0fc;
+}
+.absent-bg {
+  background-color: #99d9ea;
+}
+.adjest-bg {
+  background-color: #c9f;
+}
+.app-reported-bg {
+  background-color: #f9f;
+}
+.adjust-report-bg {
+  background-color: #c9f;
+}
+.color-grey {
+  color: $input-grey-bg !important;
+}
+.text-grey {
+  color: $text !important;
+}
+.color-blue-text {
+  font-weight: 600;
+  color: #6575be;
+}
+.color-grey {
+  color: $input-grey-bg !important;
+}
+.text-grey {
+  color: $text !important;
+}
+//maintenance strip colors
+.wheat-bg {
+  background: $pink-light;
+  padding: 5px 15px;
+}
+.blue-stripe-bg {
+  background: $light-green;
+  padding: 5px 15px;
+}
+.logbgColor {
+  background-color: #33ccff;
+}
+
+
+.telepny-bg {
+  background-color: #0fc;
+}
+.absent-bg {
+  background-color: #99d9ea;
+}
+.adjest-bg {
+  background-color: #c9f;
+}
+.app-reported-bg {
+  background-color: #f9f;
+}
+.adjust-report-bg {
+  background-color: #c9f;
+}
+
+
+.color-blue-light-opacity-2{
+  color: #80c0fe;
+}
+
+
+.last-child{
+a{
+  color: $blue !important;
+}
+}
+
+.float-white{
+.p-float-label input:focus ~ label,
+.p-float-label input.p-filled ~ label,
+.p-float-label textarea:focus ~ label,
+.p-float-label textarea.p-filled ~ label,
+.p-float-label .p-inputwrapper-focus ~ label,
+ .p-float-label .p-inputwrapper-filled ~ label{
+
+    color: $white !important;
+  }
+}
