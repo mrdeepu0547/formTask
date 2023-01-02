@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -33,7 +32,6 @@ export class DataService {
   }
   public getPSDetails(id):Observable<any>{
     return this.http.get(`${this.baseUrl}/psapi/getPSDetails?jsonObj={"psId":${id}}`);
-
   }
   private subject = new Subject();
    public editData:any
@@ -42,5 +40,11 @@ export class DataService {
 }
 accessPostData() {
     return this.subject.asObservable();
+}
+public getUserOfficeList(userId): Observable<any> {
+  return this.http.get(this.baseUrl+'/common/getUserOfficeList?jsonObj={"userId":1}');
+}
+public getPSList(obj): Observable<any> {
+  return this.http.get(this.baseUrl + '/common/getPSList?jsonObj=' + obj);
 }
 }

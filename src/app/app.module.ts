@@ -13,7 +13,12 @@ import { ContentComponent } from './content/content.component';
 import { LoginComponent } from './New/login/login.component';
 import { RegisterComponent } from './New/register/register.component';
 import { FilterPipe } from './filter.pipe';
-
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { OverlayComponentComponent } from './overlay-component/overlay-component.component';
+import {FieldsetModule} from 'primeng/fieldset';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputTextModule} from 'primeng/inputtext';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +28,8 @@ import { FilterPipe } from './filter.pipe';
     ContentComponent,
     LoginComponent,
     RegisterComponent,
-    FilterPipe
+    FilterPipe,
+    OverlayComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,12 @@ import { FilterPipe } from './filter.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ModalModule.forRoot()
+    OverlayPanelModule,
+    ModalModule.forRoot(),
+    BrowserAnimationsModule,
+    FieldsetModule,
+    DropdownModule,
+    InputTextModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

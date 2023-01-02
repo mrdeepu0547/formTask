@@ -7,7 +7,7 @@ import { DatePipe } from '@angular/common';
 import { ContentComponent } from '../content/content.component';
 import { DataService } from '../service/data.service';
 import { Subject, Subscription } from 'rxjs';
-
+import { PrimeNGConfig, OverlayOptions } from 'primeng/api';
 
 @Component({
   selector: 'app-ps-list',
@@ -77,7 +77,7 @@ export class PsListComponent implements OnInit {
   }
   subscription: Subscription;
   // public url=http://poc.aquilasoftware.com/poclite/psapi/getPSList?jsonObj={"userId":1,"lowerBound":21,"upperBound":40,}
-  constructor(public http: HttpClient, private modalService: BsModalService, public datePipe: DatePipe, public dataService: DataService) { }
+  constructor(private primengConfig: PrimeNGConfig, public http: HttpClient, private modalService: BsModalService, public datePipe: DatePipe, public dataService: DataService) { }
   ngOnInit() {
     this.dataService.getLookupData()
     this.getPSList();
@@ -88,6 +88,9 @@ export class PsListComponent implements OnInit {
         // this.postData = result;
         // this.postEditData()
       })
+      this.primengConfig.overlayOptions = {
+        appendTo: 'body'
+    };
   }
   ngOnChanges() {
     this.setPageSize()
@@ -231,6 +234,14 @@ export class PsListComponent implements OnInit {
   ngOnDestroy() {
     console.log("in destroy")
     this.subscription.unsubscribe();
+ }
+ /**
+  * overlay starts here
+  */
+ overlayVisible: boolean = false;
+
+ toggle() {
+     this.overlayVisible = !this.overlayVisible;
  }
 
 }

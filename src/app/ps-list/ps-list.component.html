@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-dark bg-primary">
   <div class="container-fluid d-flex justify-content-between text-align-right">
     <input [(ngModel)]="searchText" placeholder="search here">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+    <button type="text" pButton label="Basic" (click)="op.toggle($event)"><i class="pi pi-filter-fill"></i></button>
   </div>
 </nav>
 <div class="mx-2 my-2">
-  <table class="table " style="height: calc(100vh - 90px);">
+  <table class="table " style="height: calc(90vh - 90px);">
     <table class="table table-success table-hover table-light">
       <thead>
         <tr>
@@ -391,4 +391,9 @@ class="form-control-sm"
     </form>
   </div>
 </ng-template>
-
+<p-overlayPanel [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"  [style]="{width: '85%',height:'80%'}"
+#op [dismissable]="true" [showCloseIcon]="false">
+  <ng-template pTemplate>
+    <app-overlay-component></app-overlay-component>
+  </ng-template>
+</p-overlayPanel>
