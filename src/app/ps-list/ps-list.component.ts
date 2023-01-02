@@ -8,6 +8,7 @@ import { ContentComponent } from '../content/content.component';
 import { DataService } from '../service/data.service';
 import { Subject, Subscription } from 'rxjs';
 
+
 @Component({
   selector: 'app-ps-list',
   templateUrl: './ps-list.component.html',
@@ -18,11 +19,12 @@ export class PsListComponent implements OnInit {
   modalRef?: BsModalRef;
   public psList = [];
   public lookUpsData: any = [];
-  public pageSize: number = 20;
+  public pageSize: number = 10;
   public paseSizes: number[] = [5, 10, 15, 20];
   public lowerBound = 1;
-  public upperBound = 20;
+  public upperBound = 10;
   public posts = [];
+  public searchText;
   //form defiened here
   personForm = new FormGroup({
     psId: new FormControl(0),

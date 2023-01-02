@@ -12,6 +12,8 @@ import { DatePipe } from '@angular/common';
 import { ContentComponent } from './content/content.component';
 import { LoginComponent } from './New/login/login.component';
 import { RegisterComponent } from './New/register/register.component';
+import { FilterPipe } from './filter.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,8 @@ import { RegisterComponent } from './New/register/register.component';
     FormComponent,
     ContentComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

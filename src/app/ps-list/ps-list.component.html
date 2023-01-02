@@ -1,18 +1,11 @@
-<p>ps-list works!</p>
-<label class="card-title mr-2">Table size</label>
-<select
-class="form-control-sm"
-[(ngModel)]="pageSize"
-(ngModelChange)="setPageSize()">
-<option *ngFor="let size of paseSizes">{{ size }}</option>
-</select>
-<hr>
-<div class="d-flex ms-auto order-5">
-  <button class="btn btn-light" type="button" [disabled]="lowerBound<=0" (click)="onPrevious()">Previous</button>&nbsp;&nbsp;
-  <button class="btn btn-dark" type="button" (click)="onNext()">Next</button>
-</div>
-<div>
-  <table class="table ">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid d-flex justify-content-between text-align-right">
+    <input [(ngModel)]="searchText" placeholder="search here">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+  </div>
+</nav>
+<div class="mx-2 my-2">
+  <table class="table " style="height: calc(100vh - 90px);">
     <table class="table table-success table-hover table-light">
       <thead>
         <tr>
@@ -27,7 +20,7 @@ class="form-control-sm"
           <th>Edit</th>
         </tr>
       </thead>
-      <tbody *ngFor="let data of psList ,let i = index">
+      <tbody *ngFor="let data of psList|filter: searchText; ,let i = index">
         <tr>
           <td>{{data.PSName}}</td>
           <td>{{data.PSId}}</td>
@@ -43,10 +36,20 @@ class="form-control-sm"
     </table>
   </table>
 </div>
-<div>
+<div class="d-flex justify-content-between">
   <button type="button" class="btn btn-primary" (click)="openModalWithClass(template1)">Create</button>
-<br>
-
+ <div>
+<label class="card-title mr-2">Table size</label>
+<select
+class="form-control-sm"
+[(ngModel)]="pageSize"
+(ngModelChange)="setPageSize()">
+<option *ngFor="let size of paseSizes">{{ size }}</option>
+</select>
+  <button class="btn btn-light" type="button" [disabled]="lowerBound<=0" (click)="onPrevious()">Previous</button>&nbsp;&nbsp;
+  <button class="btn btn-dark" type="button" (click)="onNext()">Next</button>
+</div>
+</div>
 <ng-template #template1>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
@@ -388,4 +391,4 @@ class="form-control-sm"
     </form>
   </div>
 </ng-template>
-</div>
+
